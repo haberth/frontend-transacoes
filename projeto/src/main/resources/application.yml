@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: ms-orizon-api-bradesco
+  
+  # MongoDB Configuration
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/bradesco_transactions}
+      database: ${MONGODB_DATABASE:bradesco_transactions}
+  
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:/}
+  
+  # Server Configuration
+  server:
+    port: ${SERVER_PORT:8080}
+    servlet:
+      context-path: ${CONTEXT_PATH:/api/v1}
+
+# External Services Configuration
+external:
+  authorization:
+    url: ${AUTHORIZATION_SERVICE_URL:http://localhost:8081}
+    timeout: ${AUTHORIZATION_TIMEOUT:30s}
+  
+# Logging Configuration
+logging:
+  level:
+    com.example: ${LOG_LEVEL:INFO}
+    org.springframework.cloud.openfeign: ${FEIGN_LOG_LEVEL:DEBUG}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Management and Health Check
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+  health:
+    mongo:
+      enabled: true
+    rabbitmq:
+      enabled: true

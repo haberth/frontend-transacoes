@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: bradesco-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: bradesco_transactions
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - bradesco-network
+
+  # RabbitMQ Message Broker
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: bradesco-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - bradesco-network
+
+  # Main Application
+  ms-orizon-api:
+    build: .
+    container_name: bradesco-api
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/bradesco_transactions?authSource=admin
+      MONGODB_DATABASE: bradesco_transactions
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: admin
+      RABBITMQ_PASSWORD: password
+      AUTHORIZATION_SERVICE_URL: http://authorization-service:8081
+      SERVER_PORT: 8080
+      LOG_LEVEL: INFO
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+      - rabbitmq
+    networks:
+      - bradesco-network
+
+  # Mock Authorization Service (for testing)
+  authorization-service:
+    image: wiremock/wiremock:3.3.1
+    container_name: bradesco-auth-mock
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./wiremock:/home/wiremock
+    networks:
+      - bradesco-network
+
+volumes:
+  mongodb_data:
+  rabbitmq_data:
+
+networks:
+  bradesco-network:
+    driver: bridge

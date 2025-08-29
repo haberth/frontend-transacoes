@@ -1,0 +1,53 @@
+spring:
+  # Production MongoDB Configuration
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: ${MONGODB_DATABASE}
+  
+  # Production RabbitMQ Configuration
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VHOST}
+    ssl:
+      enabled: ${RABBITMQ_SSL_ENABLED:true}
+
+# External Services - Production URLs
+external:
+  authorization:
+    url: ${AUTHORIZATION_SERVICE_URL}
+    timeout: ${AUTHORIZATION_TIMEOUT:60s}
+
+# Production Logging
+logging:
+  level:
+    com.example: ${LOG_LEVEL:WARN}
+    org.springframework.cloud.openfeign: ${FEIGN_LOG_LEVEL:INFO}
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-},%X{spanId:-}] %logger{40} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-},%X{spanId:-}] %logger{40} - %msg%n"
+  file:
+    name: /var/log/ms-orizon-api-bradesco/application.log
+    max-size: 100MB
+    max-history: 30
+
+# Production Management and Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  health:
+    probes:
+      enabled: true
