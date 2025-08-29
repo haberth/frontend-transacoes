@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-orizon-api-internal
+  labels:
+    app: ms-orizon-api
+    service-type: internal
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: api
+  selector:
+    app: ms-orizon-api

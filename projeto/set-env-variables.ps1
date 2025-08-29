@@ -15,7 +15,7 @@ $env:RABBITMQ_PASSWORD = "guest"
 $env:RABBITMQ_VHOST = "/"
 
 # Server Configuration
-$env:SERVER_PORT = "8080"
+$env:SERVER_PORT = "8082"
 $env:CONTEXT_PATH = "/api/v1"
 
 # External Services

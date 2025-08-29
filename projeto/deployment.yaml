@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-orizon-api-deployment
+  labels:
+    app: ms-orizon-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-orizon-api
+  template:
+    metadata:
+      labels:
+        app: ms-orizon-api
+    spec:
+      containers:
+      - name: ms-orizon-api
+        image: haberth/projeto-ms-orizon-api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://admin:password@mongodb:27017/bradesco_transactions?authSource=admin"
+        - name: MONGODB_DATABASE
+          value: "bradesco_transactions"
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"
+        - name: RABBITMQ_PORT
+          value: "5672"
+        - name: RABBITMQ_USERNAME
+          value: "admin"
+        - name: RABBITMQ_PASSWORD
+          value: "password"
+        - name: AUTHORIZATION_SERVICE_URL
+          value: "http://authorization-service:8080"
+        - name: SERVER_PORT
+          value: "8080"
+        - name: LOG_LEVEL
+          value: "INFO"
+        livenessProbe:
+          httpGet:
+            path: /transactions/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /transactions/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"

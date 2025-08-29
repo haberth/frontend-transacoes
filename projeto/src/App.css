@@ -1,0 +1,81 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+#root {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+}
+.panel {
+  background-color: #252526;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+h1, h2 {
+  color: #569cd6;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+}
+textarea {
+  width: 100%;
+  min-height: 150px;
+  background-color: #3c3c3c;
+  color: #d4d4d4;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+button {
+  background-color: #0e639c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+button:hover {
+  background-color: #1177bb;
+}
+button:disabled {
+  background-color: #333;
+  cursor: not-allowed;
+}
+pre {
+  background-color: #1e1e1e;
+  padding: 15px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  min-height: 50px;
+}
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+.outputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.outputs > div {
+  flex: 1;
+  min-width: 300px;
+}
+.error {
+  color: #f48771;
+  font-weight: bold;
+}

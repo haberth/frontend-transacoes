@@ -1,0 +1,67 @@
+{
+  "name": "ms-orizon-api-bradesco",
+  "version": "1.0.0",
+  "description": "Spring Boot microservice with MongoDB for Bradesco transaction processing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/start.js",
+    "dev": "concurrently \"npm run start:services\" \"npm run start:app\"",
+    "start:services": "docker-compose up -d mongodb rabbitmq authorization-service",
+    "start:app": "mvn spring-boot:run",
+    "stop:services": "docker-compose down",
+    "build": "mvn clean package -DskipTests",
+    "test": "mvn test",
+    "test:integration": "mvn verify -P integration-tests",
+    "docker:build": "docker build -t ms-orizon-api-bradesco:latest .",
+    "docker:run": "docker-compose up --build",
+    "docker:stop": "docker-compose down",
+    "lint:java": "mvn spotless:check",
+    "format:java": "mvn spotless:apply",
+    "docs:generate": "mvn javadoc:javadoc",
+    "env:setup": "powershell -ExecutionPolicy Bypass -File ./set-env-variables.ps1",
+    "postinstall": "echo 'Dependencies installed. Run npm run env:setup to configure environment variables.'",
+    "clean": "mvn clean && docker-compose down -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ms-orizon-api-bradesco.git"
+  },
+  "keywords": [
+    "spring-boot",
+    "microservice",
+    "mongodb",
+    "rabbitmq",
+    "feign",
+    "bradesco",
+    "transactions",
+    "java",
+    "docker"
+  ],
+  "author": "Bradesco Development Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "cross-env": "^7.0.3",
+    "rimraf": "^5.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "chalk": "^4.1.2"
+  },
+  "config": {
+    "java_version": "21",
+    "maven_version": "3.9.8",
+    "spring_boot_version": "3.2.0"
+  },
+  "directories": {
+    "src": "src",
+    "test": "src/test",
+    "docs": "docs"
+  }
+}
