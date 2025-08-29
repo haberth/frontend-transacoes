@@ -1,4 +1,4 @@
 com\example\TransactionService.class
+com\example\Transaction.class
 com\example\TransactionClient.class
 com\example\TransactionRepository.class
-com\example\Transaction.class
