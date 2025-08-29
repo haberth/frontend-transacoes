@@ -1,0 +1,45 @@
+{
+  "leases": [
+    {
+      "id": "",
+      "datacenter": {
+        "ID": "",
+        "LeaseEndpoint": "",
+        "Capability": ""
+      },
+      "last_activity": "0001-01-01T00:00:00Z"
+    }
+  ],
+  "runtime": {},
+  "organization": {
+    "id": {
+      "tcc": ""
+    },
+    "name": "",
+    "enabled": false,
+    "type": "",
+    "personal": {
+      "username": ""
+    },
+    "docker": {
+      "orgname": ""
+    }
+  },
+  "autostart": true,
+  "account_context": "haberth",
+  "profile": {
+    "account_type": "user",
+    "service_account_id": "3e5dadf1-75a8-463e-8880-afeaaa7c1f58",
+    "features": {
+      "TurboMode": false
+    },
+    "name": "haberth",
+    "email": "haberth@gmail.com",
+    "nickname": "haberth",
+    "org_id": "haberth",
+    "picture": "",
+    "sub": "google-oauth2|116088379109061155614",
+    "auth_type": "custom",
+    "auth_name": ""
+  }
+}

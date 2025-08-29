@@ -1,0 +1,7 @@
+2025-08-19 20:42:16.189256 [I] [sync] Looking for existing sessions
+2025-08-19 20:42:16.189256 [I] [housekeeping] Performing initial housekeeping
+2025-08-19 20:42:16.192540 [W] [housekeeping] Failed to list the contents of the caches directory C:\Users\summit-bra\AppData\Local\AtomicJar\testcontainers.cloud.desktop\mutagen\caches: unable to open directory: open C:\Users\summit-bra\AppData\Local\AtomicJar\testcontainers.cloud.desktop\mutagen\caches: The system cannot find the file specified.
+2025-08-19 20:42:16.196495 [I] [sync] Session manager initialized
+2025-08-19 20:42:16.198262 [I] Mutagen daemon listening C:\Users\summit-bra\AppData\Local\AtomicJar\testcontainers.cloud.desktop\mutagen\daemon\daemon.sock
+2025-08-19 20:56:54.888185 [I] Terminating due to context cancellation:
+2025-08-19 20:56:54.892889 [I] [sync] Shutting down
